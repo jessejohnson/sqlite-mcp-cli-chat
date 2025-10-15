@@ -41,7 +41,7 @@ def get_current_datetime() -> str:
 
 @mcp.tool()
 def select_query(query: str) -> list[str]:
-    """Make a request to a SQlite database with St Bakhita Catholic Church member data
+    """Make a request to a connected SQlite database
 
     Args:
         query: a SQL SELECT query compatible with SQlite3
