@@ -10,6 +10,7 @@ load_dotenv()
 mcp = FastMCP("SQlite3 Server")
 DB_PATH = os.environ["SERVER_DB_PATH"]
 FILES_DIR = os.environ["SERVER_RESOURCE_DIR"]
+LOG_FILE = os.environ["LOG_DIR"] + "sqlite-server.log"
 
 def _query_db(query: str) -> list[str]:
     logging.info(f"Received query '{query}' ")
@@ -78,5 +79,16 @@ def read_resource_file(name: str) -> dict[str,str]:
 def main():
     mcp.run(transport="stdio")
 
+def setup_basic_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s>    %(filename)s:line %(lineno)d %(message)s',       
+         handlers=[
+            logging.FileHandler(LOG_FILE),
+            logging.StreamHandler()
+        ]
+    )
+
 if __name__ == "__main__":
+    setup_basic_logging()
     main()

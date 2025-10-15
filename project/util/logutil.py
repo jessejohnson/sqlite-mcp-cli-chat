@@ -1,7 +1,8 @@
 import logging
-from settings import Settings
+from settings import settings
 
 is_configured = False
+LOG_FILE = settings.LOG_DIR + "mcp_client.log"
 
 class Colors:
     RESET = "\033[0m"
@@ -34,10 +35,22 @@ class ColoredFormatter(logging.Formatter):
 
 def setup_logging():
     logger = logging.getLogger()
-    handler = logging.StreamHandler()
     formatter = ColoredFormatter('%(asctime)s %(levelname)s>    %(filename)s:line %(lineno)d %(message)s')
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(formatter)
+
+    file_handler = logging.handlers.RotatingFileHandler(
+        filename=LOG_FILE,
+        maxBytes=5 * 1024 * 1024,
+        backupCount=5,
+        encoding='utf-8'
+        )
+    file_handler.setFormatter(formatter)
+    
+    logger.addHandler(stream_handler)
+    logger.addHandler(file_handler)
+
     logger.setLevel(logging.INFO)
 
     is_configured = True
@@ -46,5 +59,9 @@ def setup_logging():
 def setup_basic_logging():
     logging.basicConfig(
         level=logging.INFO,
-        format='%(asctime)s %(levelname)s>    %(filename)s:line %(lineno)d %(message)s'
+        format='%(asctime)s %(levelname)s>    %(filename)s:line %(lineno)d %(message)s',       
+         handlers=[
+            logging.FileHandler(LOG_FILE),
+            logging.StreamHandler()
+        ]
     )

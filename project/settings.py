@@ -12,5 +12,6 @@ class Settings:
     MAX_TOKENS: int = os.environ["MAX_TOKENS"]
     SERVER_DB_PATH: str = os.environ["SERVER_DB_PATH"]
     SERVER_RESOURCE_DIR: str = os.environ["SERVER_RESOURCE_DIR"]
+    LOG_DIR: str = os.environ["LOG_DIR"]
 
 settings = Settings()
