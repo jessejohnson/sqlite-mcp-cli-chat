@@ -1,0 +1,1 @@
+python project/mcp_client.py project/server/sqlite-server.py
