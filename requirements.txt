@@ -2,3 +2,4 @@ anthropic==0.70.0
 mcp==1.17.0
 python-dotenv==1.1.1
 google-genai==1.44.0
+openai==1.97.1

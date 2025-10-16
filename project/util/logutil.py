@@ -4,6 +4,9 @@ from settings import settings
 is_configured = False
 LOG_FILE = settings.LOG_DIR + "mcp_client.log"
 
+def get_log_level() -> str:
+    return settings.LOG_LEVEL.upper()
+
 class Colors:
     RESET = "\033[0m"
     RED = "\033[31m"
@@ -51,14 +54,14 @@ def setup_logging():
     logger.addHandler(stream_handler)
     logger.addHandler(file_handler)
 
-    logger.setLevel(logging.INFO)
+    logger.setLevel(get_log_level())
 
     is_configured = True
     logging.info("Loggging set up completed")
 
 def setup_basic_logging():
     logging.basicConfig(
-        level=logging.INFO,
+        level=get_log_level(),
         format='%(asctime)s %(levelname)s>    %(filename)s:line %(lineno)d %(message)s',       
          handlers=[
             logging.FileHandler(LOG_FILE),
