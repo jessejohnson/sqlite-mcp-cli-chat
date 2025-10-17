@@ -5,7 +5,11 @@
 
 A simple cli mcp client-server chat application that lets you talk to a single sqlite database and related files.
 
-Run with 
+Run with:
 ```
 sh run.sh
 ```
+
+Output:
+
+![screenshot of cli run with Chinook sample db](sqlite-mcp-cli-chat.png "Talking to the Chinook DB with Gemini")

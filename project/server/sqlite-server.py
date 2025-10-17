@@ -91,4 +91,6 @@ def setup_basic_logging():
 
 if __name__ == "__main__":
     setup_basic_logging()
+    # res = get_database_schema()
+    # print(res)
     main()
